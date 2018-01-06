@@ -1,0 +1,181 @@
+<link rel="shortcut icon" href="../images/mgndev.png" type="image/x-icon" />
+<title>Admin MGN Dev</title>
+<style type="text/css">
+body {
+	background-color:#ffffff;
+	margin-left: 0px;
+	margin-top: 0px;
+	margin-right: 0px;
+	margin-bottom: 0px;
+	text-align: center;
+}
+#welcom{
+	height: 30px;
+	background-color:#171717;
+	padding:15px;
+	font-family: gulim;
+	Font-weight : bolder; 
+	color:#fff;
+	font-size: 40px;
+	text-align: left;
+	border-bottom-left-radius:0px;
+	border-bottom-right-radius:0px;
+	border-top-left-radius:0px;
+	border-top-right-radius:0px;
+	width: 96%;
+	border: 2.5px solid #171717;
+}
+#keluar{
+	height: 46px;
+	width: 4%;
+	margin-top : -65px;
+	float: right;
+	background-color:#466A84;
+	padding: 15px;
+	padding-top: 0px;
+	padding-right:0px;
+	color:#fff;
+	border-bottom-left-radius:0px;
+	border-bottom-right-radius:0px;
+	border-top-left-radius:0px;
+	border-top-right-radius:0px;
+	border: 2.5px solid transparent;
+	background-color: transparent;
+
+}
+#keluar a{
+	text-decoration:none;
+	color:#FFFFFF;
+	-moz-transition: all 0.65s;
+	-webkit-transition: all 0.65s;
+	float:right;
+	padding:15px;
+	padding-right:0px;
+}
+#keluar a:hover{
+	color:#000000;   
+	-moz-transition: all 0.65s;
+	-webkit-transition: all 0.65s;
+	padding:10px;
+	padding-right:0px;
+}
+#kiri{
+	background-color:#466A84;
+	max-width:150px;
+	height : 500px;
+	float:left;
+	border-bottom-left-radius:0px;
+	border-bottom-right-radius:0px;
+	box-shadow-bottom: 0 0 50px #000000;
+	
+	
+}
+
+#balkiri{
+
+	width:130px;
+	font:bold 12px verdana, arial, helvetica, sans-serif;
+	
+
+}
+#balkiri li a{
+	text-decoration:none;
+	border-top:1px solid;
+	color:#ffffff;
+	display:block;
+	background-color:#171717;
+	padding:12px;
+	border: 0px solid #000000;
+	-moz-transition: all 0.65s ease-in-out;
+	-webkit-transition: all 0.65s ease-in-out;
+}
+
+#balkiri li a:hover{
+	background-color:#fffff1;
+	color:#000000;
+	-moz-transform:translate(1em, 0pt);-webkit-transform:translate(1em, 0pt);   
+}
+.am{
+	color:#000000;
+	border-radius:0px;
+}
+
+#balkiri ul {
+	list-style:none;
+	padding:0px;
+
+
+}
+#balkiri ul ul{
+	position:absolute;
+	left:135px;
+	visibility:hidden;
+	margin-top : -35px;
+	
+}
+#balkiri ul li:hover ul{
+	visibility:visible;
+}
+.keren{
+	margin-left: 300px;
+	width:60%;
+	align: center;
+	background-color:#ffffff;
+	box-shadow: 0 0 50px #000000;
+}
+.keren th{
+	background-color: #408080;
+	border: #408080 solid thick;
+}
+.keren tr td{
+	padding: 10px;
+	border: #000000 solid thin;
+}
+.shadow{
+	box-shadow: 0 0 50px #000000;
+}
+</style>
+<?php
+session_start();
+if(empty($_SESSION['pengguna']))
+{
+	header("location:login.php");
+}else{
+//koneksi data base
+include "../inc/koneksi.php";
+//ini untuk isinya
+$lihat_data=mysql_query("SELECT * FROM user WHERE user='$_SESSION[pengguna]'");
+$tampil_user=mysql_fetch_array($lihat_data);
+echo"<div id=welcom>Sugeng Rawuh $tampil_user[nama]</div>";
+echo "<div id=keluar><a href='keluar.php'><img src='logout.png' align='left title='Metu'/></a></div>";
+//ini akhir untuk isinya
+}
+?>
+<div id="kiri">
+<div id="balkiri">
+<ul>
+<li><a href="?admin=menu">Manager Menu</a></li>
+<li><a href="?admin=user">Manager User</a></li>
+<li><a href="?admin=artikel">Manager Artikel</a></li>
+<li>
+<a href="?admin=upload&upload">Upload</a>
+</li>
+<li>
+<a href="?admin=unduh&unduh">Download</a>
+</li>
+</ul>
+</div>
+</div>
+<div id="konten">
+<?php
+if(ISSET($_GET["admin"]))
+{
+if($_GET["admin"]=="menu"){include "adm_menu.php";}
+if($_GET["admin"]=="user"){include "adm_user.php";}
+if($_GET["admin"]=="artikel"){include "adm_artikel.php";}
+if($_GET["admin"]=="upload"){include "upload.php";}
+if($_GET["admin"]=="unduh"){include "unduh.php";}
+//echo "ini halaman menu";
+}
+?>
+</div>

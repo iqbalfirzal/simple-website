@@ -1,0 +1,34 @@
+<html>
+	<head>
+		<title>Dolanan</title>
+		<script type="text/javascript" src="assets/js/phaser.js"></script>
+		<script type="text/javascript" src="assets/js/starting.js"></script>
+		<script type="text/javascript" src="assets/js/loading.js"></script>
+		<script type="text/javascript" src="assets/js/cover.js"></script>
+		<script type="text/javascript" src="assets/js/main.js"></script>
+		<script type="text/javascript" src="assets/js/gameover.js"></script>
+		<script type="text/javascript" src="assets/js/finish.js"></script>
+		<script type="text/javascript">
+		(function(){
+			if(localStorage.highScore&&localStorage.score){
+				localStorage.highScore = localStorage.highScore; 
+				localStorage.score  = localStorage.score;
+			} else {
+ 				localStorage.highScore = "";
+ 				localStorage.score    = "";
+			}
+			var game = new Phaser.Game(1348,650,Phaser.CANVAS,'game');
+			game.state.add("starting",starting);
+			game.state.add("loading",loading);
+			game.state.add("cover",cover);
+			game.state.add("main",main);
+			game.state.add("gameover",gameover);
+			game.state.add("finish",finish);
+			game.state.start("starting",starting);
+		})();
+		</script>
+	</head>
+	<body>
+		<div id="game"></div>
+	</body>
+</html>
